@@ -1,0 +1,46 @@
+[
+    {
+      "id": "price_abcd0001",
+      "title": "Fullstack T-Shirt",
+      "description": "Bring Fullstack Developer to your wardrobe with this high quality tshirt.",
+      "image": "/images/fullstack.jpg",
+      "price": 500.00
+    },
+    {
+      "id": "price_abcd0002",
+      "title": "Nodejs T-Shirt",
+      "description": "Show your love for Nodejs with this tshirt!",
+      "image": "/images/nodejs.jpg",
+      "price": 1000.00
+    },
+    {
+      "id": "price_abcd0003",
+      "title": "Reactjs T-shirt",
+      "description": "Show your love for Reactjs with this tshirt!",
+      "image": "/images/Reactjs.jpg",
+      "price": 1700.00
+    },
+
+    {
+        "id": "price_abcd0004",
+        "title": "Salesforce T-shirt",
+        "description": "The standard, traditional t-shirt for everyday wear",
+        "image": "/images/salesforce.jpg",
+        "price": 100.00
+      },
+      {
+        "id": "price_abcd0005",
+        "title": "Security T-shirt",
+        "description": "Show your love for Security Engineer with this tshirt!",
+        "image": "/images/Security.jpg",
+        "price": 700.00
+      },
+      {
+      "id": "price_abcd0006",
+      "title": "System Admin T-shirt",
+      "description": "Show your love for Reactjs with this tshirt!",
+      "image": "/images/System_admin.jpg",
+      "price": 700.00
+    }
+
+  ]
