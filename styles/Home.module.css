@@ -125,3 +125,12 @@
 }
 
 
+.button{
+  padding: 1rem;
+  border-radius: 5px;
+  background: #6ed2ee;
+  font-size: 20px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 700;
+}
