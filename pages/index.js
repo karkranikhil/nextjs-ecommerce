@@ -1,11 +1,53 @@
+import {useState} from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import products from '../products.json'
 import {initiateCheckout} from '../lib/payment'
+const defaultCart = {
+  products:{}
+}
 export default function Home() {
+   const [cart, updateCart] = useState(defaultCart)
+   console.log(cart)
   console.log(products)
   console.log(process.env.NEXT_PUBLIC_STRIPE_API_AKEY)
+  const cartItem = Object.keys(cart.products).map(key=>{
+    const product = products.find(({id})=> id === key)
+    return {
+      ...cart.products[key],
+      pricePerItem:product.price
+    }
+  })
+  console.log(cartItem)
+  const subTotal = cartItem.reduce((total, {pricePerItem, quantity})=>{
+    return total+(pricePerItem*quantity)
+  }, 0)
+
+  const totalItems = cartItem.reduce((total, {quantity})=>{
+    return total+quantity
+  }, 0)
+
+  console.log(subTotal)
+  const addToCart = ({id}={})=>{
+    updateCart(prev=>{
+      let cartState={...prev}
+      if(cartState.products[id]){
+        cartState.products[id].quantity = cartState.products[id].quantity+1
+      } else {
+        cartState.products[id]={
+          id,
+          quantity:1
+        }
+      }
+      return cartState
+    })
+  }
+  function checkout(){
+    initiateCheckout({  
+      lineItems:cartItem.map(item=>({price:item.id, quantity:item.quantity}))
+    })
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -22,7 +64,14 @@ export default function Home() {
         <p className={styles.description}>
          The best place to buy Programmers swag on the web!
         </p>
-
+        <p className={styles.description}>
+        <strong>Items:{totalItems}  </strong>
+        <br/>
+        <strong>Total Cost:Rs.{subTotal}</strong>
+        
+        <br/>
+        <button className={styles.button} onClick={checkout}>Check Out</button>
+        </p>
         <ul className={styles.grid}>
           {products.map(product=>{
             const{title, price, description, image, id} = product
@@ -34,14 +83,9 @@ export default function Home() {
                   <p>Rs.{price}</p>
                   <p>{description}</p>
                   <p>
-                    <button className={styles.button} onClick={()=>initiateCheckout({
-                      lineItems:[
-                        {
-                          price:id,
-                          quantity:1
-                        }
-                      ]
-                    })}>Buy Now</button>
+                    <button className={styles.button} onClick={()=>addToCart({id})
+                    
+                    }>Add to Cart</button>
                   </p>
                 </a>
               </li>
