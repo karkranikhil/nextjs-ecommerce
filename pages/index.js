@@ -19,26 +19,6 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        {/* <ul className={styles.grid}>
-          {products.map(product=>{
-            const{title, price, description, image, id} = product
-            return (
-              <li className={styles.card} key={id}>
-                <a href="#">
-                  <img src={image} alt={title} height="300"/>
-                  <h2>{title}</h2>
-                  <p>Rs.{price}</p>
-                  <p>{description}</p>
-                  <p>
-                    <button className={styles.button} onClick={()=>addToCart({id})
-                    
-                    }>Add to Cart</button>
-                  </p>
-                </a>
-              </li>
-            )
-          })}
-        </ul> */}
         <ul className={styles.cards}>
           {products.map(product=>{
             const{title, price, description, image, id} = product
