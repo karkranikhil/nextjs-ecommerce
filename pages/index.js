@@ -1,6 +1,6 @@
 
 import Head from 'next/head'
-import { FaShoppingCart } from 'react-icons/fa';
+import Link from 'next/link';
 
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -24,10 +24,14 @@ export default function Home() {
             const{title, price, description, image, id} = product
             return (
               <li key={id}  className={styles.card}>
+                <Link href={`/products/${id}`}>
+                  <a>
                   <img src={image} alt={title} />
                   <h2>{title}</h2>
                   <p className={styles.price}>Rs.{price}</p>
                   <p>{description}</p>
+                  </a>
+                  </Link>
                   <p><button className={styles.button} onClick={()=>addToCart({id})
                     
                     }>Add to Cart</button>

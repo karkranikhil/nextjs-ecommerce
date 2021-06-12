@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react';
+import { useEffect, useState, createContext, useContext } from 'react';
 
 import { initiateCheckout } from '../lib/payment.js'
 
@@ -14,7 +14,17 @@ export const CartContext = createContext(null);
 
 export const useCartState=()=> {
   const [cart, updateCart] = useState(defaultCart);
-
+  useEffect(()=>{
+    const stateFromLocal = window.localStorage.getItem('cart')
+    const data = stateFromLocal && JSON.parse(stateFromLocal)
+    if(data){
+      updateCart(data)
+    }
+  }, [])
+  useEffect(()=>{
+    const data = JSON.stringify(cart)
+    window.localStorage.setItem('cart', data)
+  }, [cart])
   const cartItems = Object.keys(cart.products).map(key => {
     const product = products.find(({ id }) => `${id}` === `${key}`);
     return {
