@@ -2,7 +2,7 @@
     {
       "id": "price_1J0jNwSCnS8nvzoR1QtzVyNC",
       "title": "Fullstack T-Shirt",
-      "description": "Bring Fullstack Developer to your wardrobe with this high quality tshirt.",
+      "description": "Show your love for Fullstack with this tshirt!",
       "image": "/images/fullstack.jpg",
       "price": 500.00
     },
@@ -24,14 +24,14 @@
     {
         "id": "price_abcd0004",
         "title": "Salesforce T-shirt",
-        "description": "The standard, traditional t-shirt for everyday wear",
+        "description": "Show your love for Salesforce with this tshirt!",
         "image": "/images/salesforce.jpg",
         "price": 100.00
       },
       {
         "id": "price_abcd0005",
         "title": "Security T-shirt",
-        "description": "Show your love for Security Engineer with this tshirt!",
+        "description": "Show your love for Security with this tshirt!",
         "image": "/images/Security.jpg",
         "price": 700.00
       },
