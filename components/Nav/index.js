@@ -17,7 +17,7 @@ const Nav = () => {
       </Link>
       <p className={styles.navCart}>
         <Link href="/cart">
-          <a><FaShoppingCart /> ${subtotal?.toFixed(2)}</a>
+          <a><FaShoppingCart /> Rs.{subtotal?.toFixed(2)}</a>
         </Link>
       </p>
     </nav>
