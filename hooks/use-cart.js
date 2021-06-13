@@ -2,8 +2,8 @@ import { useEffect, useState, createContext, useContext } from 'react';
 
 import { initiateCheckout } from '../lib/payment.js'
 
-import products from '../products.json';
-
+// import products from '../products.json';
+import { getProductsList } from '../lib/products.js'
 const defaultCart = {
   products: {}
 }
@@ -13,6 +13,13 @@ export const CartContext = createContext(null);
 
 
 export const useCartState=()=> {
+  const [products, setProducts] = useState([])
+  useEffect(async()=>{
+    const productsList =  await getProductsList()
+    setProducts(productsList)
+  }, [])
+
+
   const [cart, updateCart] = useState(defaultCart);
   useEffect(()=>{
     const stateFromLocal = window.localStorage.getItem('cart')
@@ -25,11 +32,12 @@ export const useCartState=()=> {
     const data = JSON.stringify(cart)
     window.localStorage.setItem('cart', data)
   }, [cart])
+
   const cartItems = Object.keys(cart.products).map(key => {
     const product = products.find(({ id }) => `${id}` === `${key}`);
     return {
       ...cart.products[key],
-      pricePerUnit: product.price
+      pricePerUnit: product?.price
     }
   });
 
@@ -68,19 +76,36 @@ export const useCartState=()=> {
       })
     })
   }
+  function updateItem({ id, quantity }) {
+    updateCart((prev) => {
+      let cart = {...prev};
 
+      if ( cart.products[id] ) {
+        cart.products[id].quantity = quantity;
+      } else {
+        cart.products[id] = {
+          id,
+          quantity: 1
+        }
+      }
+
+      return cart;
+    })
+  }
   return {
     cart,
     subtotal,
     quantity,
     addToCart,
-    checkout
+    checkout,
+    cartItems,
+    updateItem,
+    products
   }
 
 }
 
 export const useCart=()=> {
   const cart = useContext(CartContext);
-  console.log("useCard", cart)
   return cart;
 }

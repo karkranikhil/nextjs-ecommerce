@@ -4,7 +4,8 @@ import styles from '../../styles/Product.module.css'
 
 import { useCart } from '../../hooks/use-cart.js';
 
-import products from '../../products.json';
+// import products from '../../products.json';
+import { getProductsList } from '../../lib/products'
 
 export default function Product({ product }) {
 
@@ -61,6 +62,7 @@ export default function Product({ product }) {
 }
 
 export async function getStaticProps({ params = {} }) {
+  const products =  await getProductsList()
   const product = products.find(({ id }) => `${id}` === `${params.productId}`);
   return {
     props: {
@@ -70,6 +72,7 @@ export async function getStaticProps({ params = {} }) {
 }
 
 export async function getStaticPaths() {
+  const products =  await getProductsList()
   const paths = products.map((product) => {
     const { id } = product;
     return {

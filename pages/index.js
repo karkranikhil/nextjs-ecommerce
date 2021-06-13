@@ -1,15 +1,15 @@
 
 import Head from 'next/head'
 import Link from 'next/link';
-
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {useCart} from '../hooks/use-cart'
-import products from '../products.json'
+// import products from '../products.json'
 
 export default function Home() {
-  const {subtotal, quantity, addToCart, checkout  } = useCart()
 
+  console.log("getProductsList", )
+  const {addToCart, products=[]  } = useCart()
   return (
     <div className={styles.container}>
       <Head>
@@ -20,7 +20,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <ul className={styles.cards}>
-          {products.map(product=>{
+          {products && products.map(product=>{
             const{title, price, description, image, id} = product
             return (
               <li key={id}  className={styles.card}>
